@@ -11,6 +11,12 @@ import SwiftyJSON
 
 extension Github {
     struct Repo {
+        enum Types {
+            case forkedRepo
+            case privateRepo
+            case publicRepo
+        }
+
         let name: String
         let forked: Bool
         let isPrivate: Bool

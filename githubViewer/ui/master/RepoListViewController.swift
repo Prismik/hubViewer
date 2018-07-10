@@ -52,7 +52,7 @@ class RepoListViewController: UIViewController {
             strongSelf.data = data
             DispatchQueue.main.async {
                 let viewData: [RepoListItemViewData] = data.map({
-                    let repoType: Github.RepoType
+                    let repoType: Github.Repo.Types
                     if $0.forked {
                         repoType = .forkedRepo
                     } else {
@@ -71,7 +71,7 @@ extension RepoListViewController: RepoListViewDelegate {
         let repo = data[index]
         Github.branches(in: repo, handler: { [weak self] (_ data: [Github.Branch]) in
             guard let strongSelf = self else { return }
-            let detailViewController = RepoDetailViewController(repoName: repo.name, branches: data)
+            let detailViewController = RepoDetailViewController(repo: repo, branches: data)
             strongSelf.splitViewController?.showDetailViewController(detailViewController, sender: self)
         })
         

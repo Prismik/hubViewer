@@ -18,13 +18,15 @@ class RepoDetailViewController: UIViewController {
         return view as! RepoDetailView
     }
     
-    private var branches: [Github.Branch] = []
-
-    init(repoName: String, branches: [Github.Branch]) {
+    private var branches: [Github.Branch]
+    private var repo: Github.Repo?
+    init(repo: Github.Repo?, branches: [Github.Branch]) {
+        self.branches = branches
+        self.repo = repo
         super.init(nibName: nil, bundle: nil)
         
-        self.branches = branches
-        title = repoName
+        
+        title = repo?.name ?? ""
         extendedLayoutIncludesOpaqueBars = true
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -52,5 +54,13 @@ class RepoDetailViewController: UIViewController {
 }
 
 extension RepoDetailViewController: RepoDetailViewDelegate {
-    
+    func didSelectBranch(atIndex index: Int) {
+        guard let repo = repo else { return }
+        Github.pullRequests(in: repo, handler: { [weak self] (_ pullRequests: [Github.PullRequest]) in
+            let viewData: [PullRequestListItemViewData] = pullRequests.map({
+                return PullRequestListItemViewData(number: "\($0.number)", name: $0.name)
+            })
+            self?.mainView.loadPullRequestsDetails(viewData: viewData)
+        })
+    }
 }

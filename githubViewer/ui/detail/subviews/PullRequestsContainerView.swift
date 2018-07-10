@@ -17,7 +17,11 @@ class PullRequestsContainerView: UIView {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(PullRequestListViewCell.self, forCellReuseIdentifier: PullRequestListViewCell.reuseIdentifier)
+        tableView.backgroundColor = .white
         addSubview(tableView)
+        
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,11 +31,12 @@ class PullRequestsContainerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
+        tableView.pin.all()
     }
     
-    func configure() {
-        
+    func configure(viewData: [PullRequestListItemViewData]) {
+        self.data = viewData
+        tableView.reloadData()
     }
 }
 
@@ -45,7 +50,10 @@ extension PullRequestsContainerView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: <#T##String#>, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PullRequestListViewCell.reuseIdentifier, for: indexPath) as! PullRequestListViewCell
+        cell.configure(viewData: data[indexPath.row])
+        
+        return cell
     }
 }
 

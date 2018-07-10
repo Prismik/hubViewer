@@ -16,6 +16,7 @@
 		2510DBCE20F53F0C005956D3 /* GithubCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBCD20F53F0C005956D3 /* GithubCommit.swift */; };
 		2510DBD020F550FF005956D3 /* PullRequestsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBCF20F550FF005956D3 /* PullRequestsContainerView.swift */; };
 		2510DBD220F567B7005956D3 /* PullRequestListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBD120F567B7005956D3 /* PullRequestListViewCell.swift */; };
+		2510DBD420F56B49005956D3 /* GithubReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBD320F56B49005956D3 /* GithubReview.swift */; };
 		25D2F6F920F3CEEA00EF8973 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F6F820F3CEEA00EF8973 /* AppDelegate.swift */; };
 		25D2F6FB20F3CEEA00EF8973 /* RepoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F6FA20F3CEEA00EF8973 /* RepoDetailViewController.swift */; };
 		25D2F70020F3CEEC00EF8973 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25D2F6FF20F3CEEC00EF8973 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		2510DBCD20F53F0C005956D3 /* GithubCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCommit.swift; sourceTree = "<group>"; };
 		2510DBCF20F550FF005956D3 /* PullRequestsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsContainerView.swift; sourceTree = "<group>"; };
 		2510DBD120F567B7005956D3 /* PullRequestListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestListViewCell.swift; sourceTree = "<group>"; };
+		2510DBD320F56B49005956D3 /* GithubReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubReview.swift; sourceTree = "<group>"; };
 		25D2F6F520F3CEEA00EF8973 /* githubViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25D2F6F820F3CEEA00EF8973 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25D2F6FA20F3CEEA00EF8973 /* RepoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				2510DBC620F45C1A005956D3 /* GithubRepo.swift */,
 				2510DBC820F45CB1005956D3 /* GithubPullRequest.swift */,
 				2510DBCD20F53F0C005956D3 /* GithubCommit.swift */,
+				2510DBD320F56B49005956D3 /* GithubReview.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				25D2F72620F3DC1F00EF8973 /* GithubHttpService.swift in Sources */,
 				25D2F72020F3D0B600EF8973 /* RepoDetailView.swift in Sources */,
 				2510DBC520F45BFF005956D3 /* GithubBranch.swift in Sources */,
+				2510DBD420F56B49005956D3 /* GithubReview.swift in Sources */,
 				25D2F72B20F3DDB600EF8973 /* LoginView.swift in Sources */,
 				2510DBC720F45C1A005956D3 /* GithubRepo.swift in Sources */,
 				25D2F71A20F3D02600EF8973 /* RepoListViewController.swift in Sources */,

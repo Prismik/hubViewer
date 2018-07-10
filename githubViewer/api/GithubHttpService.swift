@@ -150,7 +150,7 @@ class GithubHttpService: NSObject {
         session.dataTask(with: prepareRequest(forUrl: url), completionHandler: completionHandler).resume()
     }
     
-    func pullRequests(repoName: String, owner: String, handler: @escaping(_ data: [Github.PullRequest]) -> Void) {
+    func pullRequests(repoName: String, owner: String, base: String? = nil, handler: @escaping(_ data: [Github.PullRequest]) -> Void) {
         guard let url = Github.Endpoints.pullRequests(owner: owner, repo: repoName).url else { return }
         let completionHandler = {(data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard error == nil, let data = data, let response = response as? HTTPURLResponse,
@@ -162,10 +162,38 @@ class GithubHttpService: NSObject {
                 let json = try JSON(data: data)
                 var parsedData: [Github.PullRequest] = []
                 for (_, subJson):(String, JSON) in json {
-                    if let branch = Github.Branch(json: subJson) {
-                        parsedData.append(branch)
+                    if let pullRequest = Github.PullRequest(json: subJson) {
+                        parsedData.append(pullRequest)
                     }
                 }
+            } catch {
+                print("error")
+                handler([])
+            }
+        }
+
+        let params: [String: String] = base == nil ? [:] : ["base": base!]
+        session.dataTask(with: prepareRequest(forUrl: url, params: params), completionHandler: completionHandler).resume()
+    }
+    
+    // reviews
+    func reviews(repoName: String, owner: String, number: Int, handler: @escaping(_ data: [Github.Review]) -> Void) {
+        guard let url = Github.Endpoints.reviews(owner: owner, repo: repoName, number: number).url else { return }
+        let completionHandler = {(data: Data?, response: URLResponse?, error: Error?) -> Void in
+            guard error == nil, let data = data, let response = response as? HTTPURLResponse,
+                response.statusCode == 200 else {
+                    handler([])
+                    return
+            }
+            do {
+                let json = try JSON(data: data)
+                var parsedData: [Github.Review] = []
+                for (_, subJson):(String, JSON) in json {
+                    if let pullRequest = Github.Review(json: subJson) {
+                        parsedData.append(pullRequest)
+                    }
+                }
+                handler(parsedData)
             } catch {
                 print("error")
                 handler([])

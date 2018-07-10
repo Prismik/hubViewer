@@ -10,8 +10,9 @@ import Foundation
 import SwiftyJSON
 
 extension Github {
-    struct PullRequest {
+    class PullRequest {
         enum Status: String {
+            case unknown = "unknown"
             case open = "open"
             case pending = "PENDING"
             case approved = "APPROVE"
@@ -21,30 +22,35 @@ extension Github {
         let number: Int
         let name: String
         let message: String
-        let status: Github.PullRequest.Status
+        private(set) var status: Github.PullRequest.Status = .unknown
+        private let stateValue: String
         
-        init?(PRJson: JSON, reviewsJSON: JSON) {
-            guard let number = PRJson["number"].int else { return nil }
-            guard let title = PRJson["title"].string else { return nil }
-            guard let message = PRJson["body"].string else { return nil }
-            guard let state = PRJson["state"].string else { return nil }
+        init?(json: JSON) {
+            guard let number = json["number"].int else { return nil }
+            guard let title = json["title"].string else { return nil }
+            guard let message = json["body"].string else { return nil }
+            guard let state = json["state"].string else { return nil }
 
             self.number = number
             self.name = title
             self.message = message
-            self.status = Github.PullRequest.parseStatus(value: state, reviews: reviewsJSON)
+            self.stateValue = state
         }
         
-        private static func parseStatus(value: String, reviews: JSON) -> Github.PullRequest.Status {
-            if let state = Github.PullRequest.Status(rawValue: value), state == .open {
-                return state
+        // Github does not make it straightforward to get the PR status. We must go fetch the reviews and then
+        // mix the state from the PR with the status from the last review.
+        func computeStatus(review: Github.Review?) {
+            if let state = Github.PullRequest.Status(rawValue: stateValue), state == .open {
+                self.status = state
+                return
+            }
+
+            guard let review = review else {
+                self.status = .open
+                return
             }
             
-            // this one is different, we must see the last review and check if it is approved or not
-            guard let reviews = reviews.array, let lastReview = reviews.last else { return .open }
-            let reviewStatus = lastReview["state"].stringValue
-            guard let state = Github.PullRequest.Status(rawValue: reviewStatus) else { return .pending }
-            return state
+            // TODO Revoir
         }
     }
 }

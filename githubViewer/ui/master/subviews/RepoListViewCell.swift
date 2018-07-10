@@ -11,7 +11,22 @@ import UIKit
 struct RepoListItemViewData {
     let mainImage: UIImage?
     let name: String
-    let repoType: Github.RepoType
+    let repoTypeImage: UIImage?
+    
+    init(mainImage: UIImage?, name: String, repoType: Github.Repo.Types) {
+        self.mainImage = mainImage
+        self.name = name
+        self.repoTypeImage = {
+            switch repoType {
+            case .forkedRepo:
+                return UIImage(named: "forked")
+            case .privateRepo:
+                return UIImage(named: "private")
+            case .publicRepo:
+                return UIImage(named: "public")
+            }
+        }()
+    }
 }
 
 class RepoListViewCell: UITableViewCell {
@@ -43,7 +58,7 @@ class RepoListViewCell: UITableViewCell {
         mainImageView.image = viewData.mainImage ?? UIImage(named: "default")
         nameLabel.text = viewData.name
         nameLabel.sizeToFit()
-        typeImageView.image = viewData.repoType.image
+        typeImageView.image = viewData.repoTypeImage
         setNeedsLayout()
     }
     

@@ -10,14 +10,14 @@ import UIKit
 import PinLayout
 
 protocol RepoDetailViewDelegate: class {
-    
+    func didSelectBranch(atIndex index: Int)
 }
 
 class RepoDetailView: UIView {
     weak var delegate: RepoDetailViewDelegate?
     
     private let branchesTableView = UITableView()
-
+    private let pullRequestsContainer = PullRequestsContainerView()
     private var data: [BranchListItemViewData] = []
 
     private let sizingCell = BranchListViewCell(style: .default, reuseIdentifier: BranchListViewCell.reuseIdentifier)
@@ -45,6 +45,10 @@ class RepoDetailView: UIView {
         branchesTableView.reloadData()
     }
     
+    func loadPullRequestsDetails(viewData: [PullRequestListItemViewData]) {
+        pullRequestsContainer.configure(viewData: viewData)
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -75,6 +79,6 @@ extension RepoDetailView: UITableViewDataSource {
 
 extension RepoDetailView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO
+        delegate?.didSelectBranch(atIndex: indexPath.row)
     }
 }

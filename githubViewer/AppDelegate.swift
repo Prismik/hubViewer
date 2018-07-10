@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func makeSplitViewController() -> UISplitViewController {
         let splitViewController =  UISplitViewController()
         let rootViewController = RepoListViewController()
-        let detailViewController = RepoDetailViewController(repoName: "", branches: [])
+        let detailViewController = RepoDetailViewController(repo: nil, branches: [])
         let rootNavigationController = UINavigationController(rootViewController: rootViewController)
         let detailNavigationController = UINavigationController(rootViewController: detailViewController)
         splitViewController.viewControllers = [rootNavigationController, detailNavigationController]
