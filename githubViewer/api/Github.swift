@@ -10,6 +10,11 @@ import UIKit
 
 // This would have persistance and other github related coordinations
 class Github {
+    struct UserCredentials {
+        let username: String
+        let password: String
+    }
+
     enum Endpoints {
         case authenticate
         case repos
@@ -45,7 +50,7 @@ class Github {
     
     static var user: String?
     
-    class func authenticate(with credentials: GithubUserCredentials, handler: @escaping (_ success: Bool) -> Void) {
+    class func authenticate(with credentials: Github.UserCredentials, handler: @escaping (_ success: Bool) -> Void) {
         service.authenticate(with: credentials, handler: handler)
     }
     
@@ -73,8 +78,8 @@ class Github {
         
     }
     
-    class func pullRequests(in repo: Github.Repo, handler: @escaping ([Github.PullRequest]) -> Void) {
-        service.pullRequests(repoName: repo.name, owner: repo.owner) { (_ pullRequestsData: [Github.PullRequest]) in
+    class func pullRequests(in repo: Github.Repo, branch: String, handler: @escaping ([Github.PullRequest]) -> Void) {
+        service.pullRequests(repoName: repo.name, owner: repo.owner, branch: branch, handler: { (_ pullRequestsData: [Github.PullRequest]) in
             let tasks = DispatchGroup()
             
             for pullRequest in pullRequestsData {
@@ -91,6 +96,6 @@ class Github {
             tasks.notify(queue: DispatchQueue.main, execute: {
                 handler(pullRequestsData)
             })
-        }
+        })
     }
 }

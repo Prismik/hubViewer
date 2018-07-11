@@ -50,7 +50,7 @@ extension Github {
                 return
             }
             
-            // TODO Revoir
+            self.status = review.status
         }
     }
 }

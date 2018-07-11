@@ -56,9 +56,10 @@ class RepoDetailViewController: UIViewController {
 extension RepoDetailViewController: RepoDetailViewDelegate {
     func didSelectBranch(atIndex index: Int) {
         guard let repo = repo else { return }
-        Github.pullRequests(in: repo, handler: { [weak self] (_ pullRequests: [Github.PullRequest]) in
+        let branch = branches[index]
+        Github.pullRequests(in: repo, branch: branch.name, handler: { [weak self] (_ pullRequests: [Github.PullRequest]) in
             let viewData: [PullRequestListItemViewData] = pullRequests.map({
-                return PullRequestListItemViewData(number: "\($0.number)", name: $0.name)
+                return PullRequestListItemViewData(number: $0.number, name: $0.name, message: $0.message, status: $0.status)
             })
             self?.mainView.loadPullRequestsDetails(viewData: viewData)
         })

@@ -10,7 +10,7 @@ import UIKit
 import PinLayout
 
 protocol LoginViewDelegate: class {
-    func authenticate(crendentials: GithubUserCredentials)
+    func authenticate(crendentials: Github.UserCredentials)
 }
 
 class LoginView: UIView {
@@ -89,7 +89,7 @@ class LoginView: UIView {
     @objc
     func didTapConnect() {
         guard let username = usernameInput.text, let password = passwordInput.text else { return }
-        delegate?.authenticate(crendentials: GithubUserCredentials(username: username, password: password))
+        delegate?.authenticate(crendentials: Github.UserCredentials(username: username, password: password))
     }
 }
 

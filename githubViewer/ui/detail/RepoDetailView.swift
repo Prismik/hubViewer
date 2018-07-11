@@ -27,12 +27,14 @@ class RepoDetailView: UIView {
         branchesTableView.dataSource = self
         branchesTableView.delegate = self
         branchesTableView.showsHorizontalScrollIndicator = true
-        branchesTableView.rowHeight = UITableViewAutomaticDimension
-        branchesTableView.estimatedRowHeight = UITableViewAutomaticDimension
         branchesTableView.register(BranchListViewCell.self, forCellReuseIdentifier: BranchListViewCell.reuseIdentifier)
         branchesTableView.backgroundColor = UIColor.white
+        branchesTableView.tableFooterView = UIView()
+        branchesTableView.separatorStyle = .none
         addSubview(branchesTableView)
         
+        addSubview(pullRequestsContainer)
+
         backgroundColor = UIColor.white
     }
     
@@ -53,6 +55,7 @@ class RepoDetailView: UIView {
         super.layoutSubviews()
         
         branchesTableView.pin.top(10).left(10).right(10).height(60%)
+        pullRequestsContainer.pin.below(of: branchesTableView).marginTop(25).left(10).right(10).bottom(10)
     }
 }
 
@@ -74,6 +77,15 @@ extension RepoDetailView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         sizingCell.configure(viewData: data[indexPath.row])
         return sizingCell.sizeThatFits(branchesTableView.frame.size).height
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Branches"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = UIColor.white
+        label.backgroundColor = UIColor.charcoal
+        return label
     }
 }
 

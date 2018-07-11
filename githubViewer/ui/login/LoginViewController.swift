@@ -35,12 +35,15 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginViewDelegate {
-    func authenticate(crendentials: GithubUserCredentials) {
-        Github.authenticate(with: crendentials, handler: { (success: Bool) in
+    func authenticate(crendentials: Github.UserCredentials) {
+        Github.authenticate(with: crendentials, handler: { [weak self] (success: Bool) in
+            guard let strongSelf = self else { return }
             if success {
-                self.dismiss(animated: true, completion: nil)
+                strongSelf.dismiss(animated: true, completion: nil)
             } else {
-                print("sadface")
+                let alert = UIAlertController(title: "Invalid credentials", message: "We could not access your Github information with the credentials you provided. Please try again.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                strongSelf.present(alert, animated: true, completion: nil)
             }
         })
     }

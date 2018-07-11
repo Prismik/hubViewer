@@ -25,6 +25,7 @@ class RepoListView: UIView {
         tableView.showsHorizontalScrollIndicator = true
         tableView.register(RepoListViewCell.self, forCellReuseIdentifier: RepoListViewCell.reuseIdentifier)
         tableView.backgroundColor = UIColor.white
+        tableView.tableFooterView = UIView()
         addSubview(tableView)
     }
     

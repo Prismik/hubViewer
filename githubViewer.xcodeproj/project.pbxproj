@@ -17,10 +17,11 @@
 		2510DBD020F550FF005956D3 /* PullRequestsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBCF20F550FF005956D3 /* PullRequestsContainerView.swift */; };
 		2510DBD220F567B7005956D3 /* PullRequestListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBD120F567B7005956D3 /* PullRequestListViewCell.swift */; };
 		2510DBD420F56B49005956D3 /* GithubReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBD320F56B49005956D3 /* GithubReview.swift */; };
+		2510DBD620F65EBF005956D3 /* UINavigationController+prefferedStatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBD520F65EBF005956D3 /* UINavigationController+prefferedStatusBarStyle.swift */; };
+		2510DBD820F664B3005956D3 /* GithubApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510DBD720F664B3005956D3 /* GithubApiTests.swift */; };
 		25D2F6F920F3CEEA00EF8973 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F6F820F3CEEA00EF8973 /* AppDelegate.swift */; };
 		25D2F6FB20F3CEEA00EF8973 /* RepoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F6FA20F3CEEA00EF8973 /* RepoDetailViewController.swift */; };
 		25D2F70020F3CEEC00EF8973 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25D2F6FF20F3CEEC00EF8973 /* Assets.xcassets */; };
-		25D2F70E20F3CEEC00EF8973 /* githubViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F70D20F3CEEC00EF8973 /* githubViewerTests.swift */; };
 		25D2F71A20F3D02600EF8973 /* RepoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F71920F3D02600EF8973 /* RepoListViewController.swift */; };
 		25D2F71E20F3D09700EF8973 /* RepoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F71D20F3D09700EF8973 /* RepoListView.swift */; };
 		25D2F72020F3D0B600EF8973 /* RepoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D2F71F20F3D0B600EF8973 /* RepoDetailView.swift */; };
@@ -53,13 +54,14 @@
 		2510DBCF20F550FF005956D3 /* PullRequestsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsContainerView.swift; sourceTree = "<group>"; };
 		2510DBD120F567B7005956D3 /* PullRequestListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestListViewCell.swift; sourceTree = "<group>"; };
 		2510DBD320F56B49005956D3 /* GithubReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubReview.swift; sourceTree = "<group>"; };
+		2510DBD520F65EBF005956D3 /* UINavigationController+prefferedStatusBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+prefferedStatusBarStyle.swift"; sourceTree = "<group>"; };
+		2510DBD720F664B3005956D3 /* GithubApiTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubApiTests.swift; sourceTree = "<group>"; };
 		25D2F6F520F3CEEA00EF8973 /* githubViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25D2F6F820F3CEEA00EF8973 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25D2F6FA20F3CEEA00EF8973 /* RepoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewController.swift; sourceTree = "<group>"; };
 		25D2F6FF20F3CEEC00EF8973 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25D2F70420F3CEEC00EF8973 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25D2F70920F3CEEC00EF8973 /* githubViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = githubViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		25D2F70D20F3CEEC00EF8973 /* githubViewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = githubViewerTests.swift; sourceTree = "<group>"; };
 		25D2F70F20F3CEEC00EF8973 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25D2F71920F3D02600EF8973 /* RepoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewController.swift; sourceTree = "<group>"; };
 		25D2F71D20F3D09700EF8973 /* RepoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListView.swift; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 		25D2F70C20F3CEEC00EF8973 /* githubViewerTests */ = {
 			isa = PBXGroup;
 			children = (
-				25D2F70D20F3CEEC00EF8973 /* githubViewerTests.swift */,
+				2510DBD720F664B3005956D3 /* GithubApiTests.swift */,
 				25D2F70F20F3CEEC00EF8973 /* Info.plist */,
 			);
 			path = githubViewerTests;
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				25D2F72D20F3EA0800EF8973 /* UIColor+rgb.swift */,
+				2510DBD520F65EBF005956D3 /* UINavigationController+prefferedStatusBarStyle.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				2510DBD420F56B49005956D3 /* GithubReview.swift in Sources */,
 				25D2F72B20F3DDB600EF8973 /* LoginView.swift in Sources */,
 				2510DBC720F45C1A005956D3 /* GithubRepo.swift in Sources */,
+				2510DBD620F65EBF005956D3 /* UINavigationController+prefferedStatusBarStyle.swift in Sources */,
 				25D2F71A20F3D02600EF8973 /* RepoListViewController.swift in Sources */,
 				2510DBCC20F53108005956D3 /* BranchListViewCell.swift in Sources */,
 				2510DBCE20F53F0C005956D3 /* GithubCommit.swift in Sources */,
@@ -444,7 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25D2F70E20F3CEEC00EF8973 /* githubViewerTests.swift in Sources */,
+				2510DBD820F664B3005956D3 /* GithubApiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

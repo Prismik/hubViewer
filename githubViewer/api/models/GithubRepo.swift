@@ -33,5 +33,12 @@ extension Github {
             self.isPrivate = isPrivate
             self.owner = owner
         }
+        
+        init(name: String, forked: Bool, isPrivate: Bool, owner: String) {
+            self.name = name
+            self.forked = forked
+            self.isPrivate = isPrivate
+            self.owner = owner
+        }
     }
 }

@@ -9,11 +9,6 @@
 import Foundation
 import SwiftyJSON
 
-struct GithubUserCredentials {
-    let username: String
-    let password: String
-}
-
 class GithubHttpService: NSObject {    
     var authenticated: Bool {
         return false
@@ -53,16 +48,16 @@ class GithubHttpService: NSObject {
     }
 
     // Does not work with 2FA for now
-    func authenticate(with credentials: GithubUserCredentials, handler: @escaping (_ success: Bool) -> Void ) {
+    func authenticate(with credentials: Github.UserCredentials, handler: @escaping (_ success: Bool) -> Void ) {
         guard let url = Github.Endpoints.authenticate.url else { return }
-        
         self.credentials = URLCredential(user: credentials.username, password: credentials.password,
-                                        persistence: URLCredential.Persistence.forSession)
-        
+                                         persistence: URLCredential.Persistence.forSession)
+
         let completionHandler = {(data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard error == nil, let _ = data, let response = response as? HTTPURLResponse,
                 response.statusCode == 200 else {
                 
+                self.credentials = nil
                 handler(false)
                 return
             }
@@ -150,7 +145,7 @@ class GithubHttpService: NSObject {
         session.dataTask(with: prepareRequest(forUrl: url), completionHandler: completionHandler).resume()
     }
     
-    func pullRequests(repoName: String, owner: String, base: String? = nil, handler: @escaping(_ data: [Github.PullRequest]) -> Void) {
+    func pullRequests(repoName: String, owner: String, branch: String? = nil, handler: @escaping(_ data: [Github.PullRequest]) -> Void) {
         guard let url = Github.Endpoints.pullRequests(owner: owner, repo: repoName).url else { return }
         let completionHandler = {(data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard error == nil, let data = data, let response = response as? HTTPURLResponse,
@@ -166,13 +161,15 @@ class GithubHttpService: NSObject {
                         parsedData.append(pullRequest)
                     }
                 }
+                
+                handler(parsedData)
             } catch {
                 print("error")
                 handler([])
             }
         }
 
-        let params: [String: String] = base == nil ? [:] : ["base": base!]
+        let params: [String: String] = branch == nil ? [:] : ["base": branch!]
         session.dataTask(with: prepareRequest(forUrl: url, params: params), completionHandler: completionHandler).resume()
     }
     

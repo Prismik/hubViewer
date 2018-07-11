@@ -29,6 +29,7 @@ class BranchListViewCell: UITableViewCell {
     private let messageLabel = UILabel()
     private let messageContainer = UIView()
     private let spacer = UIView()
+    private let selectionOverlay = UIView()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,6 +53,12 @@ class BranchListViewCell: UITableViewCell {
         
         spacer.backgroundColor = UIColor.harleyOrange
         addSubview(spacer)
+
+        selectionOverlay.backgroundColor = UIColor.charcoal
+        selectionOverlay.alpha = 0
+        addSubview(selectionOverlay)
+        selectedBackgroundView = UIView()
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,13 +73,14 @@ class BranchListViewCell: UITableViewCell {
         messageContainer.pin.below(of: shaLabel).marginTop(5).left().right().height(messageHeight)
         messageLabel.pin.all(10)
         spacer.pin.below(of: messageContainer, aligned: .left).horizontally().height(2)
+        selectionOverlay.pin.all()
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let nameHeight = nameLabel.sizeThatFits(size).height
         let shaHeight = shaLabel.sizeThatFits(size).height
         let messageHeight = messageLabel.sizeThatFits(CGSize(width: frame.width - 20, height: .greatestFiniteMagnitude)).height
-        let height = 10 + nameHeight + 5 + shaHeight + 15 + messageHeight + 17
+        let height = 10 + nameHeight + 5 + shaHeight + 15 + messageHeight + 12
         return CGSize(width: frame.width, height: height)
     }
 
@@ -85,5 +93,11 @@ class BranchListViewCell: UITableViewCell {
 
         messageLabel.text = viewData.message
         setNeedsLayout()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.selectionOverlay.alpha = selected ? 0.3 : 0
+        })
     }
 }
